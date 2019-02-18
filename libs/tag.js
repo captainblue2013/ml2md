@@ -7,6 +7,10 @@ const Signal = {
 };
 
 module.exports = {
+  setSignal: (key, value) => {
+    Signal[key] = value;
+    return;
+  },
   getSignal: key => {
     return Signal[key];
   },
@@ -81,7 +85,7 @@ module.exports = {
       case 'br':
         return EOL;
       case 'img':
-        return `![${tag.attribs.alt || ''}](${tag.attribs.src}`;
+        return `![${tag.attribs.alt || ''}](${Signal.IMG_PREFIX || ''}${tag.attribs.src || tag.attribs['data-original-src']}`;
       case 'a':
         return `[`;
 

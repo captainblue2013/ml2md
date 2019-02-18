@@ -3,22 +3,25 @@ const Tag = require('./libs/tag');
 const { trim } = require('./libs/func');
 
 class ML2MD {
-  constructor(content){
+  constructor(content, options = {}) {
+    for(let k in options){
+      Tag.setSignal(k, options[k]);
+    }
     this.outputs = [];
     let tree = [];
-    try{
+    try {
       tree = Parser(content)
-    }catch(e){
+    } catch (e) {
       throw new Error('Invalid ML');
     }
     this.running(tree);
   }
 
-  running(tree){
+  running(tree) {
     tree.forEach(t => {
       switch (t.type) {
         case 'tag':
-        this.outputs.push(Tag.start(t));
+          this.outputs.push(Tag.start(t));
           if (t.children && t.children.length > 0) {
             this.running(t.children);
           }
@@ -35,13 +38,13 @@ class ML2MD {
     })
   }
 
-  output(){
-    return this.outputs.join('').replace(/[\n]{3,}/g,'\n\n');
+  output() {
+    return this.outputs.join('').replace(/[\n]{3,}/g, '\n\n');
   }
 }
 
 
-module.exports = content => {
-  const instance = new ML2MD(content);
+module.exports = (content, options) => {
+  const instance = new ML2MD(content, options);
   return instance.output();
 }

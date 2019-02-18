@@ -1,6 +1,6 @@
 {
   "name": "ml2md",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "> npm i ml2md",
   "main": "main.js",
   "scripts": {

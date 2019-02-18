@@ -3,10 +3,11 @@ const { EOL } = require('os');
 const Signal = {
   OL_INDEX: 1,
   CODE_START: false,
+  TR_INDEX: 1,
 };
 
 module.exports = {
-  getSignal: key =>{
+  getSignal: key => {
     return Signal[key];
   },
   end: tag => {
@@ -34,6 +35,25 @@ module.exports = {
       case 'pre':
         Signal.CODE_START = false;
         return `${EOL}\`\`\`${EOL}`;
+      case 'table':
+        return `${EOL}`;
+      case 'tr':
+        Signal.TR_INDEX++;
+        if (Signal.TR_INDEX === 2) {
+          let tds = 0;
+          if(tag.children && tag.children.length){
+            tag.children.forEach(c=>{
+              if(c.type==='tag' && ['th','td'].includes(c.name)){
+                tds ++;
+              }
+            })
+          }
+          return `${EOL}| ${' --- |'.repeat(tds)}${EOL}`
+        }
+        return ``;
+      case 'th':
+      case 'td':
+        return ' |'
       default:
         return '';
     }
@@ -82,6 +102,14 @@ module.exports = {
         return `${EOL}\`\`\`${EOL}`;
       case 'code':
         return ''
+      case 'table':
+        Signal.TR_INDEX = 1;
+        return `${EOL}`;
+      case 'tr':
+        return `|`;
+      case 'th':
+      case 'td':
+        return ' '
       default:
         return '';
     }

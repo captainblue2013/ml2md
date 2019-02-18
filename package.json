@@ -1,7 +1,7 @@
 {
   "name": "ml2md",
-  "version": "1.0.5",
-  "description": "",
+  "version": "1.0.6",
+  "description": "> npm i ml2md",
   "main": "main.js",
   "scripts": {
     "test": "exit 0"
@@ -14,5 +14,13 @@
   },
   "devDependencies": {
     "eslint": "^5.14.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/captainblue2013/ml2md.git"
+  },
+  "bugs": {
+    "url": "https://github.com/captainblue2013/ml2md/issues"
+  },
+  "homepage": "https://github.com/captainblue2013/ml2md#readme"
 }

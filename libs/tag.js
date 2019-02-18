@@ -74,6 +74,7 @@ module.exports = {
       case 'ul':
       case 'ol':
         Signal.OL_INDEX = 1;
+        return `${EOL}`;
       case 'p':
       case 'div':
         return `${EOL}`;

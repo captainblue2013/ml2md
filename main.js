@@ -1,6 +1,6 @@
 const Parser = require('html-dom-parser');
-const Tag = require('./tag');
-const { trim } = require('./func');
+const Tag = require('./libs/tag');
+const { trim } = require('./libs/func');
 
 class ML2MD {
   constructor(content){
@@ -9,8 +9,7 @@ class ML2MD {
     try{
       tree = Parser(content)
     }catch(e){
-      console.log(`Invalid ML`);
-      process.exit();
+      throw new Error('Invalid ML');
     }
     this.running(tree);
   }

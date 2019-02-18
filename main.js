@@ -5,7 +5,14 @@ const { trim } = require('./func');
 class ML2MD {
   constructor(content){
     this.outputs = [];
-    this.running(Parser(content));
+    let tree = [];
+    try{
+      tree = Parser(content)
+    }catch(e){
+      console.log(`Invalid ML`);
+      process.exit();
+    }
+    this.running(tree);
   }
 
   running(tree){

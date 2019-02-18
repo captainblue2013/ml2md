@@ -18,8 +18,6 @@ module.exports = {
       case 'p':
       case 'div':
         return `${EOL}`;
-      case 'span':
-        return `**`;
       case 'br':
         return EOL;
       case 'img':
@@ -28,7 +26,9 @@ module.exports = {
         return `](${tag.attribs.href})`;
       case 'li':
         return EOL;
+      case 'span':
       case 'strong':
+      case 'b':
         return '**';
       case 'blockquote':
         return `${EOL}${EOL}`;
@@ -41,10 +41,10 @@ module.exports = {
         Signal.TR_INDEX++;
         if (Signal.TR_INDEX === 2) {
           let tds = 0;
-          if(tag.children && tag.children.length){
-            tag.children.forEach(c=>{
-              if(c.type==='tag' && ['th','td'].includes(c.name)){
-                tds ++;
+          if (tag.children && tag.children.length) {
+            tag.children.forEach(c => {
+              if (c.type === 'tag' && ['th', 'td'].includes(c.name)) {
+                tds++;
               }
             })
           }
@@ -78,8 +78,6 @@ module.exports = {
       case 'p':
       case 'div':
         return `${EOL}`;
-      case 'span':
-        return `**`;
       case 'br':
         return EOL;
       case 'img':
@@ -95,6 +93,8 @@ module.exports = {
           return `${Signal.OL_INDEX++}. `;
         }
       case 'strong':
+      case 'b':
+      case 'span':
         return '**';
       case 'blockquote':
         return `${EOL}${EOL}> `;

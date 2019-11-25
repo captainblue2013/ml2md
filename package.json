@@ -1,19 +1,34 @@
 {
   "name": "ml2md",
-  "version": "1.0.8",
+  "version": "1.1.0",
   "description": "> npm i ml2md",
-  "main": "main.js",
+  "main": "dist/main.js",
   "scripts": {
-    "test": "exit 0"
+    "test": "npx mocha --recursive -r ts-node/register test/**/*.spec.ts",
+    "build": "npx eslint src/**/*.ts --fix && npx tsc",
+    "lint": "npx eslint src/**/*.ts --fix",
+    "cover": "npx nyc npm test"
   },
   "keywords": [],
   "author": "lanhao",
   "license": "ISC",
   "dependencies": {
-    "html-dom-parser": "^0.1.3"
+    "@mohism/utils": "^1.0.2",
+    "html-dom-parser": "^0.2.3"
   },
   "devDependencies": {
-    "eslint": "^5.14.0"
+    "@types/chai": "^4.2.5",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.12.12",
+    "@typescript-eslint/eslint-plugin": "^2.8.0",
+    "@typescript-eslint/parser": "^2.8.0",
+    "chai": "^4.2.0",
+    "eslint": "^5.14.0",
+    "mocha": "^6.2.2",
+    "nodemon": "^2.0.1",
+    "nyc": "^14.1.1",
+    "ts-node": "^8.5.2",
+    "typescript": "^3.7.2"
   },
   "repository": {
     "type": "git",
